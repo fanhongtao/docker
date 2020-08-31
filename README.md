@@ -1,2 +1,12 @@
-# docker
-Official docker image for gollum
+# gollum docker
+
+* Official docker image for gollum.
+* The image is available on DockerHub
+  * <https://hub.docker.com/r/gollumorg/gollum>
+* You can pull the image using `docker pull gollumorg/gollum`
+
+## Status
+
+* A image is build on a regular basis using GitHub Actions
+* The image is taged `latest` and pushed to DockerHub
+* Open issues and ideas for improvements are tracked as GitHub issues in this repository - feel free to contribute
