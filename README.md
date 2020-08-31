@@ -1,5 +1,7 @@
 # gollum docker
 
+![Docker Image CI](https://github.com/gollum/docker/workflows/Docker%20Image%20CI/badge.svg?branch=master)
+
 * Official docker image for gollum.
 * The image is available on DockerHub
   * <https://hub.docker.com/r/gollumorg/gollum>
