@@ -1,10 +1,6 @@
-name: Docker Image CI - Test
+name: Docker Image CI
 
 on:
-  push:
-    branches:
-      - master
-      - work-on-ci
   schedule:
     - cron: "50 0/6 * * *"
 
