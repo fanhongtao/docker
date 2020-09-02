@@ -1,6 +1,6 @@
 
 run() {
-  docker run --rm --entrypoint="" "${GOLLUM_CI_IMAGE}":"${GOLLUM_CI_TAG}" "$@"
+  docker run --rm --entrypoint="" "${FULL}" "$@"
 }
 
 # runTestContainer $CONTAINER_NAME $TAG

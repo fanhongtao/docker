@@ -9,28 +9,22 @@ on:
 
 jobs:
 
-  build:
+  buildAndPush:
 
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
-    - name: Obtain Timestamp
-      run: echo "::set-env name=NOW::$(date +'build-%Y%m%d-%H%M%S')"
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag gollumorg/gollum:${{ env.NOW }}
-#    - name: Get Version Information
-#      run: docker run --rm gollumorg/gollum:${{ env.NOW }} --version > version.txt
-#    - name: Debug - version information
-#      run: cat version.txt
-    - name: Debug - try to run bash script in workflow
-      run: ./scripts/test-script-in-workflow.sh
-#    - name: Tag image
-#      run: docker tag gollumorg/gollum:${{ env.NOW }} gollumorg/gollum:latest
-#    - name: Login to registry
-#      run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
-#    - name: Push build-tag to registry
-#      run: docker push gollumorg/gollum:${{ env.NOW }}
-#    - name: Push latest to registry
-#      run: docker push gollumorg/gollum:latest
+    - name: Write configuration for this run
+      run: ./scripts/stepWriteRunConfig.sh
+    - name: Build the image
+      run: ./scripts/stepBuild.sh
+    - name: Create a test wiki
+      run: ./scripts/stepCreateTestWiki.sh
+    - name: Run a basic test
+      run: ./scripts/stepTest.sh
+    - name: Create all tags
+      run: ./scripts/stepTag.sh
+    - name: Push all images
+      run: ./scripts/stepPush.sh
