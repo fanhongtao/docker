@@ -8,3 +8,5 @@ echo "=============================="
 echo "$(ls -al)"
 echo "=============================="
 echo "$(env)"
+
+. "${PWD}/scripts/functions.sh"
