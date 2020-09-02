@@ -1,6 +1,9 @@
 name: Docker Image CI
 
 on:
+  push:
+    branches:
+      - improve-ci
   schedule:
     - cron: "50 0/6 * * *"
 
@@ -13,9 +16,19 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+    - name: Obtain Timestamp
+      run: echo "::set-env name=NOW::$(date +'%Y%m%dT-%H%M%S')"
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag gollumorg/gollum:latest
+      run: docker build . --file Dockerfile --tag gollumorg/gollum:${{ env.NOW }}
+    - name: Get Version Information
+      run: docker run --rm gollumorg/gollum:${{ env.NOW }} --version > version.txt
+    - name: Debug version information
+      run: cat version.txt
+    - name: Tag image
+      run: docker tag gollumorg/gollum:${{ env.NOW }} gollumorg/gollum:latest
     - name: Login to registry
       run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
-    - name: Push to registry
+    - name: Push build-tag to registry
+      run: docker push gollumorg/gollum:${{ env.NOW }}
+    - name: Push latest to registry
       run: docker push gollumorg/gollum:latest
