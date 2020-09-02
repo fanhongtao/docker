@@ -18,17 +18,19 @@ jobs:
       uses: actions/checkout@v2
     - name: Obtain Timestamp
       run: echo "::set-env name=NOW::$(date +'build-%Y%m%d-%H%M%S')"
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag gollumorg/gollum:${{ env.NOW }}
-    - name: Get Version Information
-      run: docker run --rm gollumorg/gollum:${{ env.NOW }} --version > version.txt
-    - name: Debug version information
-      run: cat version.txt
-    - name: Tag image
-      run: docker tag gollumorg/gollum:${{ env.NOW }} gollumorg/gollum:latest
-    - name: Login to registry
-      run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
-    - name: Push build-tag to registry
-      run: docker push gollumorg/gollum:${{ env.NOW }}
-    - name: Push latest to registry
-      run: docker push gollumorg/gollum:latest
+#    - name: Build the Docker image
+#      run: docker build . --file Dockerfile --tag gollumorg/gollum:${{ env.NOW }}
+#    - name: Get Version Information
+#      run: docker run --rm gollumorg/gollum:${{ env.NOW }} --version > version.txt
+#    - name: Debug - version information
+#      run: cat version.txt
+    - name: Debug - try to run bash script in workflow
+      run: ./scripts/test-script-in-workflow.sh
+#    - name: Tag image
+#      run: docker tag gollumorg/gollum:${{ env.NOW }} gollumorg/gollum:latest
+#    - name: Login to registry
+#      run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
+#    - name: Push build-tag to registry
+#      run: docker push gollumorg/gollum:${{ env.NOW }}
+#    - name: Push latest to registry
+#      run: docker push gollumorg/gollum:latest
