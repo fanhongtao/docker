@@ -1,6 +1,6 @@
 # gollum docker
 
-![Docker Image CI](https://github.com/gollum/docker/workflows/Docker%20Image%20CI/badge.svg?branch=master)
+![Build Image Weekly](https://github.com/gollum/docker/workflows/Build%20Image%20Weekly/badge.svg?branch=master)
 
 * Official docker image for gollum.
 * The image is available on DockerHub
