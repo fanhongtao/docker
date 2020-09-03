@@ -26,5 +26,7 @@ jobs:
       run: ./scripts/stepTest.sh
     - name: Create all tags
       run: ./scripts/stepTag.sh
+    - name: Login to DockerHub
+      run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
     - name: Push all images
       run: ./scripts/stepPush.sh
