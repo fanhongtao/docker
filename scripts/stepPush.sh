@@ -14,7 +14,7 @@ set -x
 # ---------------------------------------------------------------------------------------------------------------------
 # push everything
 
-docker push "${FULL}"
+# docker push "${FULL}"
 docker push "${LATEST}"
 
 [[ -z "${MAJOR}" ]]          || docker push "${IMAGE}:${MAJOR}"
