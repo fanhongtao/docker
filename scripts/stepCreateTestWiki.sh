@@ -14,6 +14,9 @@ mkdir "${TEST_WIKI}"
 
 pushd "${TEST_WIKI}" 2>&1 > /dev/null
 
+git config --global user.email "sméagol@middle.earth"
+git config --global user.name "Gollum"
+
 git init .
 
 cat > Home.md << __HERE__
