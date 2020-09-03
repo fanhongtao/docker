@@ -5,7 +5,7 @@ on:
     branches:
       - improve-ci
   schedule:
-    - cron: "50 0/6 * * *"
+    - cron: "50 3 * * 0"
 
 jobs:
 
