@@ -1,0 +1,34 @@
+name: Build Image Weekly
+
+on:
+  push:
+    branches:
+      - improve-ci
+  schedule:
+    - cron: "50 3 * * 0"
+
+jobs:
+
+  buildAndPush:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Write configuration for this run
+      run: ./scripts/stepWriteRunConfig.sh
+    - name: Build the image
+      run: ./scripts/stepBuild.sh
+    - name: Create a test wiki
+      run: ./scripts/stepCreateTestWiki.sh
+    - name: Run a basic test
+      run: ./scripts/stepTest.sh
+    - name: Create all tags
+      run: ./scripts/stepTag.sh
+    - name: Obtain Detailed Version Information
+      run: ./scripts/stepVersionInfo.sh
+    - name: Login to DockerHub
+      run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
+    - name: Push all images
+      run: ./scripts/stepPush.sh
