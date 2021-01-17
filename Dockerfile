@@ -14,5 +14,9 @@ VOLUME /wiki
 
 WORKDIR /wiki
 
+RUN useradd wiki
+
+USER wiki
+
 ENTRYPOINT ["gollum"]
 
